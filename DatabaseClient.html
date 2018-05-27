@@ -1,0 +1,53 @@
+<!-- Aufgabe: Aufgabe 6 Database Server
+Name: Tim Lieberherr
+Matrikel: 257969
+Datum: 27.05.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
+Er wurde nicht kopiert und auch nicht diktiert.-->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>DatabaseClient</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="DatabaseClient.css" type="text/css" media="screen" />
+<script src="Interfaces.js" type="text/javascript" charset="utf-8"></script>
+<script src="ProcessForm.js" type="text/javascript" charset="utf-8"></script>
+<script src="Server.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<form action="http://localhost:8100" method="get"></form>
+		<fieldset id="input">
+			<legend> Formular bitte ausfüllen </legend>
+			<input type="text" name="name" placeholder="Name" /> <input
+				type="text" name="firstname" placeholder="Vorname" /> <input
+				type="text" name="matrikel" placeholder="Matrikelnr" />
+			<div>
+				Studiengang wählen: <select name="studypath" id="select">
+					<option value="MKB">MKB</option>
+					<option value="MIB">MIB</option>
+					<option value="OMB">OMB</option>
+				</select>
+			</div>
+			<input type="number" name="age" placeholder="Alter" min="1" max="120" />
+			<input type="radio" name="gender" value="male" id="male" /> <label
+				for="männlich">Männlich</label> <input type="radio" name="gender"
+				value="female" id="female" /> <label for="weiblich">Weiblich</label>
+			<button type="button" id="insert">Einfügen in die Datenbank</button>
+		</fieldset>
+
+		<fieldset id="output">
+			<legend> Alle Studenten Daten </legend>
+			<button type="button" id="refresh">Aktualisieren</button>
+			<textarea rows="10" cols="90"> </textarea>
+		</fieldset>
+
+		<fieldset id="search">
+			<legend>Suche Student nach Matrikelnr</legend>
+			<input type="text" name="search" placeholder="Matrikelnr"
+				id="matrikelNr" />
+			<button type="button" id="searchButton">Suchen</button>
+			<textarea id="textarea2" rows="7" cols="90"> </textarea>
+		</fieldset>
+</body>
+</html>
