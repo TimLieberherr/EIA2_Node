@@ -34,7 +34,8 @@ namespace Aufgabe6_Interfaces {
         studiHomoAssoc[matrikel] = studi;
         studiSimpleArray.push(studi);
     }
-    /* function refresh(_event: Event): void {
+
+    function refresh(_event: Event): void {
         let output: HTMLTextAreaElement = document.getElementsByTagName("textarea")[0];
         output.value = "";
 
@@ -66,7 +67,7 @@ namespace Aufgabe6_Interfaces {
             output.value += line + "\n";
         }
 
-}
+
 
         let convert: string = JSON.stringify(studi);
         // JavaScript-JSON-Objekt wird in einen string umgewandelt
@@ -81,15 +82,16 @@ namespace Aufgabe6_Interfaces {
         // true: Asynchronous, zu einem späteren Zeitpunkt kann festgestellt werden, welche Antwort zu welcher Anfrage gehört
         xhr.addEventListener("readystatechange", handleStateChangeInsert);
         xhr.send();
+    }
+}
     
-*/
     function handleStateChangeInsert(_event: ProgressEvent): void {
         var xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             alert(xhr.response);
         }
     }
-
+/*
     //Funktion für Refresh Feld
     function refresh(_event: Event): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -125,5 +127,4 @@ namespace Aufgabe6_Interfaces {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             output.value += xhr.response;
         }
-    }
-}
+    } */
