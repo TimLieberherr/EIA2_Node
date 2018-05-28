@@ -1,5 +1,5 @@
 namespace Aufgabe6_Interfaces {
-    
+
     window.addEventListener("load", init);
     let address: string = "https://aufgabe6eia2.herokuapp.com/";
 
@@ -8,7 +8,7 @@ namespace Aufgabe6_Interfaces {
         let insertButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("insert");
         let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("refresh");
         let searchButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("searchButton");
-        
+
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
         searchButton.addEventListener("click", search);
@@ -16,14 +16,14 @@ namespace Aufgabe6_Interfaces {
     function insert(_event: Event): void {
         let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
         let genderButton: HTMLInputElement = <HTMLInputElement>document.getElementById("male");
-        let studyPath: HTMLSelectElement = <HTMLSelectElement>document.getElementById("select");  
+        let studyPath: HTMLSelectElement = <HTMLSelectElement>document.getElementById("select");
         let matrikel: string = inputs[2].value;
         let studi: Studi;
-        
+
         studi = {
             name: inputs[0].value,
             firstname: inputs[1].value,
-            studyPath: studyPath.value,          
+            studyPath: studyPath.value,
             matrikel: parseInt(matrikel),
             age: parseInt(inputs[3].value),
             gender: genderButton.checked
@@ -34,16 +34,16 @@ namespace Aufgabe6_Interfaces {
         studiHomoAssoc[matrikel] = studi;
         studiSimpleArray.push(studi);
     }
-    function refresh(_event: Event): void {
+    /* function refresh(_event: Event): void {
         let output: HTMLTextAreaElement = document.getElementsByTagName("textarea")[0];
         output.value = "";
-      
-        
-        for (let matrikel in studiHomoAssoc) { 
+
+
+        for (let matrikel in studiHomoAssoc) {
             let studi: Studi = studiHomoAssoc[matrikel];
             let line: string = matrikel + ": ";
             line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
-            line += studi.studyPath + ", ";                          
+            line += studi.studyPath + ", ";
             line += studi.gender ? "männlich" : "weiblich";
             output.value += line + "\n";
         }
@@ -53,22 +53,22 @@ namespace Aufgabe6_Interfaces {
         output.value = "";
         let matrikel: number = parseInt((<HTMLInputElement>document.getElementById("matrikelNr")).value);
         let studi: Studi = studiHomoAssoc[matrikel];
-        
+
         if (typeof studi === "undefined") {
             output.value += "Kein Suchergebnis gefunden";
         }
-        
+
         else {
             let line: string = matrikel + ": ";
             line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre, ";
-            line += studi.studyPath + ", ";                            
+            line += studi.studyPath + ", ";
             line += studi.gender ? "männlich" : "weiblich";
             output.value += line + "\n";
         }
-    
-    }
-    
-    let convert: string = JSON.stringify(studi);
+
+}
+
+        let convert: string = JSON.stringify(studi);
         // JavaScript-JSON-Objekt wird in einen string umgewandelt
         console.log(convert);
 
@@ -81,8 +81,8 @@ namespace Aufgabe6_Interfaces {
         // true: Asynchronous, zu einem späteren Zeitpunkt kann festgestellt werden, welche Antwort zu welcher Anfrage gehört
         xhr.addEventListener("readystatechange", handleStateChangeInsert);
         xhr.send();
-    }
-
+    
+*/
     function handleStateChangeInsert(_event: ProgressEvent): void {
         var xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -96,40 +96,34 @@ namespace Aufgabe6_Interfaces {
         xhr.open("GET", address + "?command=refresh", true);
         xhr.addEventListener("readystatechange", handleStateChangeRefresh);
         xhr.send();
-    }    
-    
+    }
+
     function handleStateChangeRefresh(_event: ProgressEvent): void {
         let output: HTMLTextAreaElement = document.getElementsByTagName("textarea")[0];
         output.value = "";
         var xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             output.value += xhr.response;
-        }           
+        }
     }
-    
+
     //Funktion für die Suche per Matrikelnummer   
     function search(_event: Event): void {
+        let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
         let mtrkl: string = inputs[6].value;
-        
+
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("GET", address + "?command=search&searchFor=" + mtrkl, true);
         xhr.addEventListener("readystatechange", handleStateChangeSearch);
-        xhr.send();    
+        xhr.send();
     }
-    
+
     function handleStateChangeSearch(_event: ProgressEvent): void {
         let output: HTMLTextAreaElement = document.getElementsByTagName("textarea")[1];
         output.value = "";
         var xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             output.value += xhr.response;
-        }           
+        }
     }
-
-    console.group("Simple Array");
-    console.log(studiSimpleArray);
-    console.groupEnd();
-    console.group("Associatives Array (Object)");
-    console.log(studiHomoAssoc);
-    console.groupEnd();
 }
