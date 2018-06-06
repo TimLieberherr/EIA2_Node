@@ -15,7 +15,7 @@ namespace Aufgabe6_Interfaces {
     }
 
     // Simples Array zum Speichern der Studi-Datensätze (nur zur Demonstration)
-    export let studiSimpleArray: Studi[] = [];
+    // export let studiSimpleArray: Studi[] = []; -> brauche ich nicht mehr
     
     // Homogenes assoziatives Array zur Speicherung einer Person unter der Matrikelnummer
     export let studiHomoAssoc: Studis = {};
