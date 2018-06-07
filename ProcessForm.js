@@ -1,7 +1,7 @@
 var Aufgabe6_Interfaces;
 (function (Aufgabe6_Interfaces) {
     window.addEventListener("load", init);
-    let address = "https://aufgabe6eia2.herokuapp.com/";
+    let address = "https://aufgabe6server.herokuapp.com/";
     function init(_event) {
         console.log("Init");
         let insertButton = document.getElementById("insert");

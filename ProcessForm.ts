@@ -1,7 +1,7 @@
 namespace Aufgabe6_Interfaces {
 
     window.addEventListener("load", init);
-    let address: string = "https://aufgabe6eia2.herokuapp.com/";
+    let address: string = "https://aufgabe6server.herokuapp.com/";
 
     function init(_event: Event): void {
         console.log("Init");
