@@ -1,4 +1,4 @@
-namespace Aufgabe6_Interfaces {
+namespace Aufgabe8 {
     // Struktur des heterogenen assoziativen Arrays als Datensatz fÃ¼r eine studierende Person
     export interface Studi {
         name: string;
@@ -11,14 +11,14 @@ namespace Aufgabe6_Interfaces {
 
     // Struktur des homogenen assoziativen Arrays, bei dem ein Datensatz der Matrikelnummer zugeordnet ist
     export interface Studis { // homogenes assoziatives Array
-         [matrikel: string]: Studi; 
+        [matrikel: string]: Studi;
     }
 
     // Simples Array zum Speichern der Studi-Datensätze (nur zur Demonstration)
-    // export let studiSimpleArray: Studi[] = []; -> brauche ich nicht mehr
-    
-    // Homogenes assoziatives Array zur Speicherung einer Person unter der Matrikelnummer
+    // export let studiSimpleArray: Studi[] = []; -> brauche ich nichhr
+    //ogenes assoziatives Array zur Speicherung einer Person unter der Matrikelnummer
     export let studiHomoAssoc: Studis = {};
-    
-}
 
+
+
+}

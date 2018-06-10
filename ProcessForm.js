@@ -1,21 +1,24 @@
-var Aufgabe6_Interfaces;
-(function (Aufgabe6_Interfaces) {
+var Aufgabe8;
+(function (Aufgabe8) {
     window.addEventListener("load", init);
-    let address = "https://aufgabe6server.herokuapp.com/";
+    let address = "https://eia2-node-alenamaria.herokuapp.com/";
+    let inputs = document.getElementsByTagName("input");
     function init(_event) {
         console.log("Init");
         let insertButton = document.getElementById("insert");
         let refreshButton = document.getElementById("refresh");
-        let searchButton = document.getElementById("searchButton");
+        let searchButton = document.getElementById("search");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
         searchButton.addEventListener("click", search);
     }
-    let inputs = document.getElementsByTagName("input");
     function insert(_event) {
         let genderButton = document.getElementById("male");
+        // Radio Button
         let matrikel = inputs[2].value;
+        // Variable für die Matrikelnummer anlegen
         let studi;
+        // Variable vom Typ Studi (Interface)
         studi = {
             name: inputs[0].value,
             firstname: inputs[1].value,
@@ -24,47 +27,71 @@ var Aufgabe6_Interfaces;
             gender: genderButton.checked,
             studyPath: document.getElementsByTagName("select").item(0).value
         };
-        let convert = JSON.stringify(studi); // JavaScript-JSON-Objekt das von Server kommt, wird in einen string umgewandelt
-        console.log(convert);
+        let stringifyJSON = JSON.stringify(studi);
+        // JavaScript-JSON-Objekt wird in einen string umgewandelt
+        console.log(stringifyJSON);
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", address + "?command=insert&data=" + convert, true);
-        xhr.addEventListener("readystatechange", handleStateChangeInsert);
+        xhr.open("GET", address + "?command=insert&data=" + stringifyJSON, true);
+        // "GET": Methode, mit der Daten versendet werden
+        // address: Internetaddresse vom Datentyp string (zuvor in einer Varaible gespeichert)
+        // ?order=insert&data=: wird an die Internetaddresse angehängt
+        // stringifyJSON: an die Internetaddresse werden die Daten aus dem Interface als string angehängt
+        // true: Asynchronous, zu einem späteren Zeitpunkt kann festgestellt werden, welche Antwort zu welcher Anfrage gehört
+        xhr.addEventListener("readystatechange", handleChangeInsert);
+        // Aufruf der Funktion "handleChangeInsert"
         xhr.send();
     }
-    function handleStateChangeInsert(_event) {
+    function handleChangeInsert(_event) {
         var xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
+            // wenn readyState mit XLMHttpRequest.DONE übereinstimmt, dann:
             alert(xhr.response);
         }
     }
     function refresh(_event) {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", address + "?command=refresh", true);
-        xhr.addEventListener("readystatechange", handleStateChangeRefresh);
+        // "GET": Methode, mit der Daten versendet werden
+        // address: Internetaddresse vom Datentyp string (zuvor in einer Varaible gespeichert)
+        // ?order=refresh: wird an die Internetaddresse angehängt
+        // true: Asynchronous, zu einem späteren Zeitpunkt kann festgestellt werden, welche Antwort zu welcher Anfrage gehört
+        xhr.addEventListener("readystatechange", handleChangeRefresh);
+        // Aufruf der Funktion "handleChangeRefresh"
         xhr.send();
     }
-    function handleStateChangeRefresh(_event) {
+    function handleChangeRefresh(_event) {
         let output = document.getElementsByTagName("textarea")[0];
+        // In der Variable output wird das 1. Textfeld ([0]) aus dem html-Dokument "gespeichert"
         output.value = "";
         var xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
+            // wenn readyState mit XLMHttpRequest.DONE übereinstimmt, dann:
             output.value += xhr.response;
         }
     }
     function search(_event) {
-        let mtrkl = inputs[6].value;
+        let matrikel = inputs[6].value;
+        // Variable für die Matrikelnummer anlegen
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", address + "?command=search&searchFor=" + mtrkl, true);
-        xhr.addEventListener("readystatechange", handleStateChangeSearch);
+        xhr.open("GET", address + "?command=search&searchFor=" + matrikel, true);
+        // "GET": Methode, mit der Daten versendet werden
+        // address: Internetaddresse vom Datentyp string (zuvor in einer Varaible gespeichert)
+        // ?order=search&searchFor: wird an die Internetaddresse angehängt
+        // die anktuell in der Variable matrikel gespeicherten Zahlen, werden an die Internetaddresse angehängt
+        // true: Asynchronous, zu einem späteren Zeitpunkt kann festgestellt werden, welche Antwort zu welcher Anfrage gehört
+        xhr.addEventListener("readystatechange", handleChangeSearch);
+        // Aufruf der Funktion handleChangeSearch
         xhr.send();
     }
-    function handleStateChangeSearch(_event) {
+    function handleChangeSearch(_event) {
         let output = document.getElementsByTagName("textarea")[1];
+        // In der Variable output wird das 2. Textfeld ([1]) aus dem html-Dokument "gespeichert"
         output.value = "";
         var xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
+            // wenn readyState mit XLMHttpRequest.DONE übereinstimmt, dann:
             output.value += xhr.response;
         }
     }
-})(Aufgabe6_Interfaces || (Aufgabe6_Interfaces = {})); // namespace schließen
+})(Aufgabe8 || (Aufgabe8 = {}));
 //# sourceMappingURL=ProcessForm.js.map
