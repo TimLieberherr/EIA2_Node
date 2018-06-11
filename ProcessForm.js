@@ -1,7 +1,7 @@
 var Aufgabe8;
 (function (Aufgabe8) {
     window.addEventListener("load", init);
-    let address = "https://eia2-node-alenamaria.herokuapp.com/";
+    let address = "https://aufgabe6server.herokuapp.com/";
     let inputs = document.getElementsByTagName("input");
     function init(_event) {
         console.log("Init");
